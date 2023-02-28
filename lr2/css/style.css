@@ -1,0 +1,20 @@
+header{
+	background-color: skyblue;
+	text-align: center;
+}
+header h3, .header{
+	text-align: center;
+	list-style: none;
+
+}
+main{
+	background-color: yellowgreen;
+	float:left;
+	text-align: left;
+}
+footer{
+	float:left;
+	background-color: pink;
+	margin-left: 10px;
+	width:200px;
+}
