@@ -1,0 +1,21 @@
+.headline1 h1{
+	color:blue;
+}
+.headline1 small{
+	color:#595b5c;
+}
+.headline2 h2{
+	color:black;
+}
+.headline2 small{
+	color:#595b5c;
+}
+body{
+	margin-bottom: 10px;
+}
+#headlineid {
+	color:black;
+}
+#headlineid small{
+	color:#595b5c;
+}
