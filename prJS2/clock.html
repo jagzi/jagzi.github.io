@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="chas" size="10">
+
+    <script>
+        function checkNull(number) {
+            if(number < 10) {
+                return "0" + number;
+            }
+            else {
+                return number;
+            }
+        }
+
+        function time() {
+            let time = new Date();
+
+            chas.value = checkNull(time.getHours()) + ":" + checkNull(time.getMinutes()) + ":" + checkNull(time.getSeconds());
+
+            setTimeout('time()', 1000)
+        }
+
+        time()
+
+        function minute() {
+            alert("Пройшла ще одна хвилина!");
+            setTimeout('minute()', 60000)
+        }
+
+        setTimeout('minute()', 60000)
+    </script>
+
+</body>
+</html>
