@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+    <style>
+        body {
+            font-size: 20px;
+            line-height: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div>Загальний рахунок 
+        <span id="correctPercent">0</span>% 
+        (<span id="correct">0</span> правильних відповідей з 
+        <span id="allAnswers">0</span>)
+    </div>
+    <input type="button" id="buttonNextTask" value="наступне завдання">
+    <div>
+        <span id="fstNumber">3</span> x 
+        <span id="sndNumber">4</span> = 
+        <input type="text" id="asnwerField">  
+        <input type="button" id="buttonCheck" value="перевірити">  
+    </div>
+    <div id="resultText">
+        
+    </div>
+    <script>
+        function randomTask() {
+            let firstNum = Math.floor(Math.random() * 10) + 1;
+            let secondNum = Math.floor(Math.random() * 10) + 1;
+
+            document.getElementById('fstNumber').innerHTML = firstNum
+            document.getElementById('sndNumber').innerHTML = secondNum
+
+            return firstNum * secondNum;
+        }
+
+        function checkAnswer() {
+            
+            if(parseInt(document.getElementById('asnwerField').value) === answer) {
+                result.innerHTML = "Правильна відповідь!"
+                return 1;
+            } else {
+                result.innerHTML = "Помилка, правильна відповідь «" + answer + "»";
+                return 0;
+            }
+        }
+
+        var result = document.getElementById('resultText')
+        var answer = randomTask();
+        let corAnswers = 0, allAnswers = 0;
+
+        document.getElementById('buttonCheck').addEventListener('click', () => {
+            corAnswers += checkAnswer();
+            allAnswers++;
+            document.getElementById('correctPercent').innerHTML = Math.round(corAnswers/allAnswers * 100)
+            document.getElementById('correct').innerHTML = corAnswers
+            document.getElementById('allAnswers').innerHTML = allAnswers
+        })
+        document.getElementById('buttonNextTask').addEventListener('click', () => {
+            answer = randomTask();
+            result.innerHTML = ""
+        })
+
+    </script>
+</body>
+</html>

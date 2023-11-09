@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1</title>
+    <style>
+        div {
+            width: 388px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        textarea {
+            width: 500px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="far">Температура за Фаренгейтом</label>
+        <input type="text" name="far" id="far">
+    </div>
+    <div>
+        <label for="cel">Температура за Цельсієм</label>
+        <input type="text" name="cel" id="cel">
+    </div>
+    <script>
+        let inputFar = document.getElementById('far')
+        let inputCel = document.getElementById('cel')
+
+        inputFar.addEventListener('input', () => {
+            if(!isNaN(parseFloat(inputFar.value)))
+            inputCel.value = 5/9 * (parseFloat(inputFar.value) - 32)
+        })
+
+        inputCel.addEventListener('input', () => {
+            if(!isNaN(parseFloat(inputCel.value)))
+            inputFar.value = parseFloat(inputCel.value) / (5/9) + 32;
+        })
+    </script>
+</body>
+</html>

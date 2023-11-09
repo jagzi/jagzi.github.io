@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3</title>
+    <style>
+        body {
+            font-size: 20px;
+            line-height: 28px;
+        }
+
+        .radio {
+            width: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div>Загальний рахунок 
+        <span id="correctPercent">0</span>% 
+        (<span id="correct">0</span> правильних відповідей з 
+        <span id="allAnswers">0</span>)
+    </div>
+    <input type="button" id="buttonNextTask" value="наступне завдання">
+    <div>
+        <span id="fstNumber">3</span> x 
+        <span id="sndNumber">4</span> = 
+        <div class="radio" id="radios">
+
+        </div>
+    </div>
+    <div id="resultText"></div>
+    <script>
+        const MIN_NUMBER = 1;
+        const MAX_NUMBER = 10;
+
+
+        function randomTask() {
+            let firstNum
+            let secondNum
+            do {
+                firstNum = Math.floor(Math.random() * (MAX_NUMBER - MIN_NUMBER + 1)) + MIN_NUMBER;
+            } while(firstNum === 0)  
+            do {       
+                secondNum = Math.floor(Math.random() * (MAX_NUMBER - MIN_NUMBER + 1)) + MIN_NUMBER;
+            } while(secondNum === 0)  
+            document.getElementById('fstNumber').innerHTML = firstNum
+            document.getElementById('sndNumber').innerHTML = secondNum
+            
+            return firstNum * secondNum;
+        }
+
+        function checkAnswer(answerValue) {
+            if(parseInt(answerValue) === answer) {
+                result.innerHTML = "Правильна відповідь!"
+                return 1;
+            } else {
+                result.innerHTML = "Помилка, правильна відповідь «" + answer + "»";
+                return 0;
+            }
+        }
+
+        function createAnswers() {
+            // create variants of answers
+            let answers = []
+            let tmp
+            for(let i = 0; i < 4; i++) {
+                do {
+                    tmp = Math.round((Math.random() * (2 * answer - answer/2)) + answer/2);
+                    answers[i] = tmp
+                } while(tmp === answer)
+            }
+            if(answers.indexOf(answer) === -1) {
+                answers[Math.floor(Math.random() * 4)] = answer
+            }
+
+            // create input and label in html
+            let radioButtons = document.getElementById('radios')
+            radioButtons.innerHTML = ""
+            
+            radioButtons.innerHTML = answers.map((ans) => 
+                `<div> <input type="radio" name="radio" value="${ans}" id="${ans}"> <label for="${ans}">${ans}</label></div>`).join('');
+
+
+
+            // add event listener
+            let btnList = document.querySelectorAll('input[name="radio"]');
+            for(const radioButton of btnList) {
+                radioButton.addEventListener('change', () => {
+                    if(radioButton.checked) {
+                        corAnswers += checkAnswer(radioButton.value);
+                        allAnswers++;
+                        document.getElementById('correctPercent').innerHTML = Math.round(corAnswers/allAnswers * 100)
+                        document.getElementById('correct').innerHTML = corAnswers
+                        document.getElementById('allAnswers').innerHTML = allAnswers
+                        for(const radioButton of btnList) {
+                            radioButton.setAttribute("disabled", "disabled")
+                        }
+                    }
+            })
+        }
+        }
+
+        var result = document.getElementById('resultText')
+        var answer = randomTask();
+        createAnswers();
+
+        let corAnswers = 0, allAnswers = 0;
+        
+        document.getElementById('buttonNextTask').addEventListener('click', () => {
+            answer = randomTask();
+            createAnswers()
+            result.innerHTML = ""
+        })
+
+    </script>
+</body>
+</html>
